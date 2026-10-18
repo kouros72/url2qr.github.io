@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL2QR - 심플 QR코드 생성기</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- QR코드 생성을 위한 경량 라이브러리 (qrcode-generator) -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+</head>
+<body>
+  <!-- 1. 상단 중앙 로고 -->
+  <header class="site-header">
+    <a href="#" id="logoLink" class="logo-link" title="처음으로">
+      <img src="img/logo.svg" alt="URL2QR 로고" class="logo-img" />
+    </a>
+  </header>
+
+  <!-- 3 & 4. 정중앙 QR코드 표시 영역 (클릭 시 JPG 다운로드) -->
+  <main class="qr-stage" id="qrStage" aria-live="polite">
+    <button type="button" class="qr-card" id="qrDownloadBtn" title="클릭하여 JPG로 다운로드">
+      <div class="qr-canvas-wrap">
+        <canvas id="qrCanvas" width="320" height="320"></canvas>
+        <div class="qr-hover-overlay">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          <span>JPG 다운로드</span>
+        </div>
+      </div>
+      <p class="qr-url-preview" id="qrUrlPreview"></p>
+      <span class="qr-hint">QR코드를 클릭하면 JPG 파일로 저장됩니다</span>
+    </button>
+  </main>
+
+  <!-- 2 & 3. URL 입력창 (초기엔 정중앙 -> 확인 후 하단으로 이동) -->
+  <section class="input-dock" id="inputDock">
+    <div class="intro-Label" id="introLabel">
+      <h1>QR코드로 변환할 URL을 입력하세요</h1>
+    </div>
+    <form class="url-form" id="urlForm" novalidate>
+      <div class="input-group">
+        <input
+          type="text"
+          id="urlInput"
+          class="url-input"
+          placeholder="https://example.com"
+          autocomplete="off"
+          spellcheck="false"
+          required
+        />
+        <button type="submit" class="submit-btn" id="submitBtn">확인</button>
+      </div>
+      <p class="error-msg" id="errorMsg" role="alert"></p>
+    </form>
+  </section>
+
+  <!-- 다운로드 알림 토스트 -->
+  <div class="toast" id="toast">JPG 파일 다운로드가 시작되었습니다.</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
